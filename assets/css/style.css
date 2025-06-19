@@ -1,0 +1,75 @@
+/* css buat login  */
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+
+/* css login selesai */
+
+/* css buat background halaman */
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/bg/laundry.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+/* End css buat background halaman  */
+
+/* css buat sidebar */
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 56px; /* navbar tinggi */
+    left: -250px;
+    z-index: 999;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+}
+
+/* css akhir sidebar */
+
+/* css start card */
+
+.row .card {
+  background-color: rgb(102, 91, 91);
+  
+}
+
+/* css akhir card */
