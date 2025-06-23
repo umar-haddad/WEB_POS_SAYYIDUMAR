@@ -18,6 +18,10 @@
 
 /* css login selesai */
 
+/* css login selesai */
+
+/* css login selesai */
+
 /* css buat background halaman */
 
 body {
@@ -34,7 +38,7 @@ body {
   height: 100vh;
   background-image: url("../img/bg/laundry.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center;
   filter: blur(10px);
   z-index: -1;
@@ -55,7 +59,7 @@ body {
     position: fixed;
     top: 56px; /* navbar tinggi */
     left: -250px;
-    z-index: 999;
+    z-index: 2;
   }
 
   .sidebar.active {
@@ -69,7 +73,11 @@ body {
 
 .row .card {
   background-color: rgb(102, 91, 91);
-  
+  box-shadow: 5px 6px rgb(102, 71, 71);
 }
 
 /* css akhir card */
+
+/* css akhir card-oickup */
+
+/* css akhir card-pickup */

@@ -15,7 +15,7 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                     <a href="?page=tambah-customer" class="btn btn-primary">Add</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered background-table">
                         <thead>
                             <tr>
                                 <th>No</th>

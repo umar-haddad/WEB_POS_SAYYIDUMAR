@@ -1,7 +1,13 @@
 <!-- Pages Customer Info -->
 
 <?php 
-$query = mysqli_query($config, "SELECT trans_order.*, customer.customer_name 
+$query = mysqli_query($config, "SELECT trans_order.*, customer.customer_name,
+    (
+        SELECT notes 
+        FROM trans_order_detail 
+        WHERE trans_order_detail.id_order = trans_order.id 
+        LIMIT 1
+    ) AS notes
     FROM trans_order
     LEFT JOIN customer ON trans_order.id_customer = customer.id 
     WHERE trans_order.deleted_at IS NULL
@@ -21,17 +27,15 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                     <a href="?page=tambah-trans_order" class="btn btn-primary">Add</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered background-table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama Customer</th>
                                 <th>ID</th>
                                 <th>waktu Order</th>
-                                <th>Order diambil</th>
-                                <th>Order Status</th>
-                                <th>pembayaran</th>
-                                <th></th>
+                                <th>notes</th>
+                                <th>action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,12 +45,7 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                 <td><?php echo $row['customer_name'] ?></td>
                                 <td><?php echo $row['order_code'] ?></td>
                                 <td><?php echo $row['order_date']  ?></td>
-                                <td>
-                                    <span
-                                        class="<?php echo $row['order_status'] == 1 ? 'btn btn-info' : 'btn btn-success' ?>">
-                                        <?php echo $row['order_status'] == 1 ? 'diproses' : 'selesai'  ?></span>
-                                </td>
-                                <td><?php echo $row['order_pay'] ?></td>
+                                <td><?php echo $row['notes']  ?></td>
                                 <td>
                                     <!-- <a href="?page=tambah-instructor-major&id=" class="btn btn-primary">Add
                     major</a> -->

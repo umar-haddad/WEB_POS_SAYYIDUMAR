@@ -30,7 +30,7 @@ if (isset($_GET['delete'])) {
 }
 
 
-?>  
+?>
 
 <div class="row">
     <div class="col-12">
@@ -41,18 +41,26 @@ if (isset($_GET['delete'])) {
                 <form action="" method="post">
                     <div class="mb-3">
                         <label for="">Customer :</label>
-                        <input type="text" class="form-control" name="customer_name" value="<?= isset($rowEdit['customer_name']) ? $rowEdit['customer_name'] : ''  ?>" placeholder="masukkan nama customer " required>
+                        <input type="text" class="form-control" name="customer_name"
+                            value="<?= isset($rowEdit['customer_name']) ? $rowEdit['customer_name'] : ''  ?>"
+                            placeholder="masukkan nama customer " required>
                     </div>
                     <div class="mb-3">
                         <label for="">Handphone :</label>
-                        <input type="number" class="form-control" name="phone" value="<?= isset($rowEdit['phone']) ? $rowEdit['phone'] : ''  ?>" placeholder="masukkan nomor Handphone customer " required>
+                        <input type="number" class="form-control" name="phone"
+                            value="<?= isset($rowEdit['phone']) ? $rowEdit['phone'] : ''  ?>"
+                            placeholder="masukkan nomor Handphone customer " required>
                     </div>
                     <div class="mb-3">
                         <label for="">Alamat :</label>
-                        <input type="text" class="form-control" name="address" value="<?= isset($rowEdit['address']) ? $rowEdit['address'] : ''  ?>" placeholder="masukkan Alamat customer " required>
+                        <input type="text" class="form-control" name="address"
+                            value="<?= isset($rowEdit['address']) ? $rowEdit['address'] : ''  ?>"
+                            placeholder="masukkan Alamat customer " required>
                     </div>
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-success" name="<?php echo isset($rowEdit) ? 'edit' : 'save' ?>" value="<?php echo isset($rowEdit) ? 'edit' : 'save' ?>">
+                        <input type="submit" class="btn btn-success"
+                            name="<?php echo isset($rowEdit) ? 'edit' : 'save' ?>"
+                            value="<?php echo isset($rowEdit) ? 'edit' : 'save' ?>">
                     </div>
                 </form>
             </div>

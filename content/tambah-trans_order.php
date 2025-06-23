@@ -18,25 +18,23 @@ $rowOrderDetails=mysqli_fetch_all($queryOrderDetail, MYSQLI_ASSOC);
 //buat si insert ke database si trans_order_detail dan ind
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $order_code     = uniqid('ORD_');
     $id_customer    = $_POST['id_customer'];
     $order_date     = $_POST['order_date'] ?? date('Y-m-d'  );
-    $order_end_date = $_POST['order_end_date'] ?? date('Y-m-d' );
-    $pay            = $_POST['order_pay'];  
+    $random = strtoupper(substr(uniqid(), -4));
+    $order_code     = "WKY" . $id_customer . $random;
     $status = isset($_GET['edit']) ? $_POST['order_status'] : '1';
     $total = $_POST['total'];
     //buat si insert trans_detail_order
     $id_services = $_POST['id_service'];
     $qtys = $_POST['qty'];
     $subtotals = $_POST['subtotal'] ;
+    $notes = $_POST['notes'] ;
 
     if (!empty($editOrder)) {
         $updateQ = mysqli_query($config, "UPDATE trans_order SET 
             order_code='$order_code', 
             id_customer='$id_customer', 
             order_date='$order_date', 
-            order_end_date='$order_end_date', 
-            order_pay = '$pay',
             order_status='$status',
             total = ' $total'
             WHERE id='$editOrder'");
@@ -50,9 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $qty = $qtys[$key];
                 $subtotal = $subtotals[$key];
 
-                mysqli_query($config, "INSERT INTO trans_order_detail 
-                    (id_order, id_service, qty, subtotal) 
-                    VALUES ('$editOrder', '$id_service', '$qty', '$subtotal')");
+                mysqli_query($config, "UPDATE trans_order_detail SET id_order = '$newId', id_service = '$id_service', qty = '$qty', subtotal = '$subtotal', notes = '$notes' WHERE id = '$editId'");
+
             }
 
             header("Location: ?page=trans_order&id=$editOrder&update=berhasil");
@@ -63,9 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
         $insertQ = mysqli_query($config, "INSERT INTO trans_order 
-            (order_code, id_customer, order_date, order_end_date, order_pay, order_status, total)
+            (order_code, id_customer, order_date, order_status, total)
             VALUES 
-            ('$order_code', '$id_customer', '$order_date', '$order_end_date', '$pay', '$status', '$total')");
+            ('$order_code', '$id_customer', '$order_date', '$status', '$total')");
 
              if ($insertQ) {
             $newId = mysqli_insert_id($config); 
@@ -76,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $subtotal = $subtotals[$key];
 
                 mysqli_query($config, "INSERT INTO trans_order_detail 
-                    (id_order, id_service, qty, subtotal) 
-                    VALUES ('$newId', '$id_service', '$qty', '$subtotal')");                 
+                    (id_order, id_service, qty, subtotal, notes) 
+                    VALUES ('$newId', '$id_service', '$qty', '$subtotal', '$notes')");                 
             }
 
             header("Location: ?page=trans_order&id=$newId&tambah=berhasil");
@@ -136,19 +133,6 @@ $rowServices = mysqli_fetch_all(    $queryService, MYSQLI_ASSOC);
                                 value="<?= $rowEdit['order_date'] ?? date('Y-m-d') ?>">
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="mb-2">Mau diambil kapan:</label>
-                            <input type="date" name="order_end_date" class="form-control"
-                                value="<?= $rowEdit['order_end_date'] ?? date('Y-m-d') ?>">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="mb-2">Pembayaran:</label>
-                            <input type="number" class="form-control" name="order_pay"
-                                value="<?= $rowEdit['order_pay'] ?? '' ?>" placeholder="Berapa yang dibayarkan..."
-                                required>
-                        </div>
-
                         <?php if(isset($_GET['edit'])) : ?>
                         <div class="col-md-6 mb-3">
                             <label>Status</label>
@@ -161,6 +145,11 @@ $rowServices = mysqli_fetch_all(    $queryService, MYSQLI_ASSOC);
                             </select>
                         </div>
                         <?php endif ?>
+                        <div class="col-md-6 mb-3">
+                            <label class="mb-2">notes :</label>
+                            <textarea name="notes" id="notes" value="" class="form-control"></textarea>
+                        </div>
+
 
                     </div>
                     <div class="mb-3">
@@ -184,7 +173,7 @@ $rowServices = mysqli_fetch_all(    $queryService, MYSQLI_ASSOC);
 
                         </tbody>
                         <div class="col-md-6">
-                            <label for="" id="grandtotal">Total :0</label>
+                            <label for="" class="btn btn-outline-primary" id="grandtotal">Total :0</label>
                             <input type="hidden" name="total">
                         </div>
                     </table>
