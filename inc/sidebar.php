@@ -4,19 +4,20 @@ ob_start();
 include "config/koneksi.php"; 
 
 $name = isset($_SESSION['NAME']) ? $_SESSION['NAME'] : '';
+$level = isset($_SESSION['ID_LEVEL']) ? $_SESSION['ID_LEVEL'] : 0;
 $currentPage = isset($_GET['page']) ? $_GET['page'] : '';
 ?>
 <div id="sidebar" class="bg-dark text-white p-3 sidebar ">
     <a href="/" class="d-flex align-items-center mb-3 text-white text-decoration-none">
-        <i class="fas fa-rocket fs-4 me-2"></i>
-        <span class="fs-5">MyPanel</span>
+        <i class="fa-solid fa-jug-detergent fs-5 me-2"></i>
+        <span class="fs-5">Wakey Laundry </span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
             <a href="?page=order_pickup"
                 class="nav-link <?= $currentPage == 'order_pickup' ? 'active bg-secondary' : 'text-white' ?>">
-                <i class="fas fa-home me-2"></i>Dashboard
+                <i class="fa-solid fa-cart-shopping me-2"></i>Pickup
             </a>
         </li>
         <li>
@@ -37,14 +38,15 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : '';
             <span class="fs-5">Master Data</span>
         </a>
         <li>
-            <a href="?page=user" class="nav-link <?= $currentPage == 'user' ? 'active bg-secondary' : 'text-white' ?>">
-                <i class="fas fa-users me-2"></i>Users
-            </a>
-        </li>
-        <li>
             <a href="?page=customer"
                 class="nav-link <?= $currentPage == 'customer' ? 'active bg-secondary' : 'text-white' ?>">
                 <i class="fas fa-cog me-2"></i>Customer
+            </a>
+        </li>
+        <?php if($level == 1): ?>
+        <li>
+            <a href="?page=user" class="nav-link <?= $currentPage == 'user' ? 'active bg-secondary' : 'text-white' ?>">
+                <i class="fas fa-users me-2"></i>Users
             </a>
         </li>
         <li>
@@ -55,8 +57,8 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : '';
         </li>
     </ul>
     <hr>
+    <?php endif   ?>
     <div class="form-check form-switch text-white">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
     </div>
     <div class="d-flex align-items-center gap-2 p-2">
         <i class="fa-solid fa-circle-user"></i>

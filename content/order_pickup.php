@@ -1,4 +1,4 @@
-  <!-- Pages Customer Info -->
+  <!-- Pages Order_pickup struck -->
   <?php 
 
 // jadi kita ambil dulu id dari trans_laundry_pickupnya, ambil table notes dari trans_order_detail dari trans_laundry_pickupnya, 
@@ -36,9 +36,13 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                       <?= $row['order_change'] > 0 ? 'Selesai' : 'Proses' ?>
                   </p>
                   <!-- Tombol Pay -->
-                  <?php ?> p
+                  <?php  if(isset($row['order_status']) && $row['order_status'] == 1) : ?>
                   <a href="?page=save-payment&id=<?= $row['id'] ?>" class="btn btn-sm btn-success m-2"
-                      data-id="<?= $row['id'] ?>">Pay</a>
+                      data-id="<?= $row['id'] ?>"><i class="fa-solid fa-cash-register"></i> Pay</a>
+                  <?php else : ?>
+                  <a href="print_struck.php?id=<?= $row['id'] ?>&print=true" class="btn btn-sm btn-success m-2"><i
+                          class="fas fa-print me-2"></i>Print</a>
+                  <?php endif?>
               </div>
           </div>
       </div>

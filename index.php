@@ -4,9 +4,11 @@ include 'config/koneksi.php';
 session_start();
 if(isset($_POST['email'])) {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = sha1($_POST['password']);
 
-    $queryLogin = mysqli_query($config, "SELECT * FROM user WHERE email='$email' AND password='$password'");
+    $queryLogin = mysqli_query($config, "SELECT user.*, level.id FROM user 
+    LEFT JOIN level ON level.id = user.id_level
+    WHERE email='$email' AND password='$password'");
 
 
   if (mysqli_num_rows($queryLogin) > 0) {
@@ -14,6 +16,7 @@ if(isset($_POST['email'])) {
     $rowLogin = (mysqli_fetch_assoc($queryLogin));
     $_SESSION['ID_USER'] = $rowLogin['id'];
     $_SESSION['NAME'] = $rowLogin['name'];
+    $_SESSION['ID_LEVEL'] = $rowLogin['id_level'];
     // $_SESSION['ID_ROLE'] = $role ;
 
     header("location:home.php");
