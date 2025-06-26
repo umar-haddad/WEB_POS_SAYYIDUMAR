@@ -22,6 +22,7 @@ $rowLevel = mysqli_fetch_assoc($queryLevel);
 
 $tanggal = $row[0]['created_at'] ?? date("Y-m-d H:i:s");
 $jam = explode(" ", $tanggal)[1];
+$pickup = $row[0]["pickup_date"] ?? date("H:i:s");
 ?>
 
 <!DOCTYPE html>
@@ -104,6 +105,10 @@ $jam = explode(" ", $tanggal)[1];
             <div class="row">
                 <span><?php echo $rowLevel['level_name'] ?? '-' ?></span>
                 <span><?php echo $_SESSION['NAME'] ?? '-' ?></span>
+            </div>
+            <div class="row">
+                <span>Diambil :</span>
+                <span><?php echo $pickup ?></span>
             </div>
             <div class="row">
                 <span>Order Id:</span>

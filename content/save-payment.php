@@ -7,7 +7,8 @@ $total = $rows[0]['total'] ?? 0;
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $order_pay = $_POST['order_pay'];   
+    $order_pay = $_POST['order_pay']; 
+    $order_end_date = date('Y-m-d H:i:s') ;
 
     if ($order_pay < $total) {
         echo "<script>alert('Uang anda tidak cukup');</script>";
@@ -15,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $order_change = $order_pay - $total;
 
         $updateQ = mysqli_query($config, "UPDATE trans_order 
-            SET order_pay = '$order_pay', order_change = '$order_change', order_status = 0 
+            SET order_pay = '$order_pay', order_change = '$order_change', order_end_date='$order_end_date', order_status = 0 
             WHERE id ='$id_order' ");
 
             if ($updateQ) {
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $dataOrder = mysqli_fetch_assoc($queryOrder);
 
                 $id_customer = $dataOrder['id_customer'];
-                $pickup_date = $dataOrder['order_end_date'];
+                 $pickup_date = $order_end_date;    
 
                 // Ambil notes dari salah satu trans_order_detail (kalau ada)
                 $notesQuery = mysqli_query($config, "SELECT notes FROM trans_order_detail WHERE id_order = '$id_order' LIMIT 1");

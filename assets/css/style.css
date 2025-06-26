@@ -45,6 +45,20 @@ body {
 }
 
 /* End css buat background halaman  */
+/* start css buat background tabel  */
+
+/* Target langsung <table> dan <thead>/<tbody> kalau perlu */
+table#bg-table {
+  background-color: #3e2e2e !important;
+  color: white !important;
+}
+table#bg-table th,
+table#bg-table td {
+  background-color: inherit;
+  color: inherit;
+}
+
+/* End css buat background tabel  */
 
 /* css buat sidebar */
 

@@ -14,9 +14,9 @@
       <div class="col-12">
           <div class="card">
               <div class="card-body">
-                  <h5 class="card-title"> Data User</h5>
+                  <h5 class="card-title text-white"> Data User</h5>
                   <div class="table-responsive">
-                      <table class="table table-bordered background-table">
+                      <table class="table table-bordered table-secondary">
                           <thead>
                               <tr>
                                   <th>No</th>

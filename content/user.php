@@ -12,12 +12,12 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"> Data User</h5>
+                <h5 class="card-title text-white"> Data User</h5>
                 <div class="mb-3" align="right">
                     <a href="?page=tambah-user" class="btn btn-primary">Add</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered background-table">
+                    <table class="table table-bordered table-secondary">
                         <thead>
                             <tr>
                                 <th>No</th>
